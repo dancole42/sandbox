@@ -9,7 +9,6 @@ def getAngles(angle_sharpen, length_base):
     return angle_sharpen, angle_mouth, angle_base
     
 def getLenths(length, angle1, angle2)
-    l
     length = (length * math.sin(angle1)) / math.sin(angle2)
     b = (c * math.sin(B)) / math.sin(C)
     return length
