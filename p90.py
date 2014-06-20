@@ -2,8 +2,8 @@ from math import pow, log10, sqrt
 from collections import namedtuple
 
 # DEBUGGING ################
-skip_user_input = False
-show_all_fat_models = True
+skip_user_input = True
+show_all_fat_models = False
 ############################
 
 class Athlete:
@@ -46,9 +46,11 @@ class Athlete:
 
 		caliper_fat = 0
 		if self.sex == 1:
-			caliper_fat = -450 + 495 / (0.0000144*self.caliper**2 - 0.0024801*self.caliper - 0.0002574*self.age + 1.10938)
+			caliper_fat = -450 + 495 / (0.0000144*self.caliper**2 - \
+							0.0024801*self.caliper - 0.0002574*self.age + 1.10938)
 		if self.sex == 0:
-			caliper_fat = -450 + 495 / (0.0000207*self.caliper**2 - 0.0029787*self.caliper - 0.0001392*self.age + 1.09949)
+			caliper_fat = -450 + 495 / (0.0000207*self.caliper**2 \
+							- 0.0029787*self.caliper - 0.0001392*self.age + 1.09949)
 		return caliper_fat
 
 	def body_fat_model(self):
@@ -57,9 +59,12 @@ class Athlete:
 		metric_hip = convert(self.hip, inch, meter)
 		metric_height = convert(self.height, inch, meter)
 		body_fat_model = namedtuple('body_fat_model', ('model_name', 'body_fat'))
-		bai_fat = body_fat_model('Body Adiposity Index', ((100 * metric_hip) / (metric_height * sqrt(metric_height)) - 18))
-		bmi_fat = body_fat_model('BMI Fat', ((1.2 * self.bmi()) + (0.23 * self.age) - (10.8 * self.sex) - 5.4))
-		navy_fat = body_fat_model('Navy Fat', (86.010 * log10(self.waist - self.neck) - 70.041 * log10(self.height) + 36.76))
+		bai_fat = body_fat_model('Body Adiposity Index', ((100 * metric_hip) / \
+														(metric_height * sqrt(metric_height)) - 18))
+		bmi_fat = body_fat_model('BMI Fat', ((1.2 * self.bmi()) + (0.23 * \
+											self.age) - (10.8 * self.sex) - 5.4))
+		navy_fat = body_fat_model('Navy Fat', (86.010 * log10(self.waist - \
+											self.neck) - 70.041 * log10(self.height) + 36.76))
 		caliper_fat = body_fat_model('Caliper Fat', (self.caliper_fat_model()))
 		fat_models = [bai_fat, bmi_fat, navy_fat, caliper_fat]
 		avg_fat = 0
