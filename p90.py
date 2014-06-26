@@ -209,3 +209,12 @@ def athlete_report():
 athletes = []
 athletes.append(make_athlete(skip_user_input)) # Set to True to skip user input.
 athlete_report()
+
+"""
+Unit tests
+"""
+def test_convert():
+    assert convert(4, acre, foot, 0, 1, 2) == 174240
+    assert convert(1, tbl, fl_oz) == 0.5
+    assert convert(1, pint, fl_oz, 1) == 16.0
+
